@@ -57,7 +57,7 @@ function getFields (data) {
 router.get('/meta', (req, res) => {
   Customer.customerFields().then((data) => {
     res.send(getFields(data))
-    // console.log('router.get /meta : ' + getFields(data))
+    // console.log('CustomersController.js router.get /meta : ' + getFields(data))
   }).catch((err) => {
     res.send('0')
     console.log('Error : ' + err)
