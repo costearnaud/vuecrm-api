@@ -1,6 +1,4 @@
 const express = require('express')
-const serverless = require('serverless-http')
-
 const app = express()
 const mongoose = require('mongoose')
 
@@ -37,5 +35,3 @@ app.use('/.netlify/functions/api/customers', customersRoutes)
 app.use('/.netlify/functions/api/collections', collectionsRoutes)
 
 app.listen(port, () => console.log(`Server listening on port ${port}`))
-
-module.exports.handler = serverless(app)
