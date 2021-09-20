@@ -2,7 +2,16 @@ const express = require('express')
 const serverless = require('serverless-http')
 
 const app = express()
-require('../models/database')
+const mongoose = require('mongoose')
+const uri = 'mongodb+srv://mongodb_admin:e0wl8BtEQ50Uzcnu@dreamcluster.lt12i.mongodb.net/DreamDb?retryWrites=true&w=majority'
+
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true },
+  (err) => {
+    if (!err) console.log('MongoDb connected with mongoose')
+    else console.log('MongoDb NOT connected, error : ' + err)
+  }
+)
+
 /*
 const customersRoutes = require('../routes/customersController')
 const collectionsRoutes = require('../routes/collectionsController')
@@ -26,11 +35,11 @@ app.use(cors())
 
 const customersRoutes = require('../routes/customersController')
 const collectionsRoutes = require('../routes/collectionsController')
+const port = process.env.PORT || 3000
+
 app.use('/.netlify/functions/api/customers', customersRoutes)
 app.use('/.netlify/functions/api/collections', collectionsRoutes)
 
-module.exports.handler = serverless(app)
-
-const port = process.env.PORT || 3000
-
 app.listen(port, () => console.log(`Server listening on port ${port}`))
+
+module.exports.handler = serverless(app)
